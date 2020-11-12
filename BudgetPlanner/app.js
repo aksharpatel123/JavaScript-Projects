@@ -114,7 +114,8 @@ var UIController = (function () {
         budgetLabel: '.budget__value',
         incomeLabel: '.budget__income--value',
         expensesLabel: '.budget__expenses--value',
-        percentageLabel: '.budget__expenses--percentage'
+        percentageLabel: '.budget__expenses--percentage',
+        container: '.container'
 
     }
 
@@ -136,13 +137,13 @@ var UIController = (function () {
             if (type === 'inc') {
                 element = DOMstrings.incomeContainer;
 
-                html = '<div class="item clearfix" id="income-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>';
+                html = '<div class="item clearfix" id="inc-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>';
 
             }
             else if (type === 'exp') {
                 element = DOMstrings.expenseContainer;
 
-                html = '<div class="item clearfix" id="expense-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>';
+                html = '<div class="item clearfix" id="exp-%id%"> <div class="item__description">%description%</div> <div class="right clearfix"> <div class="item__value">%value%</div> <div class="item__percentage">21%</div> <div class="item__delete"> <button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button> </div> </div> </div>';
             }
             
 
@@ -211,6 +212,9 @@ var controller = (function (budgetCtrl, UICtrl) {
                 ctrlAddItem();
             }
         });
+
+        // Triggers deletion of a task
+        document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
     };
 
     
@@ -250,6 +254,23 @@ var controller = (function (budgetCtrl, UICtrl) {
 
         }
         
+    };
+
+    // function to delete task. event tells what the target element is
+    var ctrlDeleteItem = function(event) {
+        // selects the required html element
+        var itemID, splitID, type, ID;
+        itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
+        
+        if (itemID) {
+            splitID = itemID.split('-'); // 'inc-1' => ['inc', '1']
+            type = splitID[0]; // inc / exp
+            ID = splitID[1]; // the element id
+
+            // 1. Delete item from backend
+            // 2. Delete itemfrom UI
+            // 3. Update and show new budget
+        }
     };
 
     // setupEventListeners will not get executed, needs to be called.
