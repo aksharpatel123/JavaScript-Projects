@@ -174,6 +174,11 @@ var UIController = (function () {
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
         },
 
+        deleteListItem: function(selectorID) {
+            var el = document.getElementById(selectorID);
+            el.parentNode.removeChild(el);
+        },
+
         // Clears the text input after hitting enter
         clearFields: function() {
             var fields, fieldsArr;
@@ -248,6 +253,15 @@ var controller = (function (budgetCtrl, UICtrl) {
         UICtrl.displayBudget(budget);
     };
 
+    var updatPercentages = function() {
+
+        // 1. Calculate Percentages
+
+        // 2. Read percentages from the budget controller
+
+        // 3. Update UI with new percentages
+    };
+
     // This is called everytime when a user enters new item.
     var ctrlAddItem = function() {
         var input, newItem;
@@ -270,6 +284,9 @@ var controller = (function (budgetCtrl, UICtrl) {
             // 5. Calculate and update budget
             updateBudget();
 
+            // 6. Calculate and update percentages
+            updatPercentages();
+
         }
         
     };
@@ -289,7 +306,13 @@ var controller = (function (budgetCtrl, UICtrl) {
             budgetCtrl.deleteItem(type,ID);
 
             // 2. Delete itemfrom UI
+            UICtrl.deleteListItem(itemID);
+
             // 3. Update and show new budget
+            updateBudget();
+
+            // 4. Calculate and update percentages
+            updatPercentages();
         }
     };
 
