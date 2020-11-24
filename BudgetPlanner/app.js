@@ -2,7 +2,7 @@
 var budgetController = (function() {
 
     // Constructors to add expense & Value.
-    // these will be inherited        by other objects as needed.
+    // these will be inherited   by other objects as needed.
     var Expense = function(id, description, value) {
         this.id = id;
         this.description = description;
