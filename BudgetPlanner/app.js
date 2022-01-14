@@ -91,7 +91,7 @@ var budgetController = (function() {
             
             // id = 6
             //data.allItems[type][id];
-            // ids = [1 2 4  8]
+            // ids = [1 2 4 8]
             //index = 3
             
             ids = data.allItems[type].map(function(current) {
@@ -129,6 +129,7 @@ var budgetController = (function() {
         calculatePercentages: function() {
             
             /*
+            Expense Percentage
             a=20
             b=10
             c=40
